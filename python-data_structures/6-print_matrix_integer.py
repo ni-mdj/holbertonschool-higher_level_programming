@@ -1,5 +1,5 @@
 #!/usr/bin/python3
 
-def print_matrix_integer(matrix=[[]]):
-    for row in matrix:
-        print(" ".join("{}".format(x) for x in row))
+def print_sorted_dictionary(a_dictionary):
+    for key in sorted(a_dictionary.keys()):
+        print("{}: {}".format(key, a_dictionary[key]))
