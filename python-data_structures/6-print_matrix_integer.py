@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-
-def print_sorted_dictionary(a_dictionary):
-    for key in sorted(a_dictionary.keys()):
-        print("{}: {}".format(key, a_dictionary[key]))
+def print_matrix_integer(matrix=[[]]):
+    for row in matrix:
+        for i, num in enumerate(row):
+            if i < len(row) - 1:
+                print("{:d}".format(num), end=" ")
+            else:
+                print("{:d}".format(num), end="")
+        print()
