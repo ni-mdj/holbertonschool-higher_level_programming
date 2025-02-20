@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import requests # type: ignore
+import requests
 import csv
 
 
