@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """
-Script that prints all City objects from the database hbtn_0e_14_usa
+Lists all City objects from the database hbtn_0e_14_usa,
+sorted by cities.id, displaying them in the format:
+<state name>: (<city id>) <city name>
 """
 
 import sys
@@ -10,16 +12,20 @@ from model_state import Base, State
 from model_city import City
 
 if __name__ == "__main__":
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
-                           .format(sys.argv[1], sys.argv[2], sys.argv[3]),
-                           pool_pre_ping=True)
+    # Create the database engine
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
+        sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True)
 
+    # Create a session
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    cities = session.query(City, State).join(State).order_by(City.id).all()
+    # Query all cities with their state names, ordered by city.id
+    results = session.query(City, State).join(State).order_by(City.id).all()
 
-    for city, state in cities:
+    # Print results in the required format
+    for city, state in results:
         print("{}: ({}) {}".format(state.name, city.id, city.name))
 
+    # Close session
     session.close()
